@@ -2,6 +2,8 @@
 
 import RPi.GPIO as GPIO
 import time
+from subprocess import call
+import sys
 
 GPIO.setmode(GPIO.BOARD)
 pin = 13
@@ -14,4 +16,5 @@ while 1:
     time.sleep(0.2)
   else:
     print('intruder!!!')
-    time.sleep(0.2)
+    call(["raspistill", "-o", "test.jpg"])
+    sys.exit(0)
