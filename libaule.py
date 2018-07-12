@@ -49,7 +49,7 @@ class StreamingHttpHandler(BaseHTTPRequestHandler):
             return
         elif self.path == '/start':
            aule.init_cam(timed=False)
-           return 
+           return
         elif self.path == '/jsmpg.js':
             content_type = 'application/javascript'
             content = self.server.jsmpg_content
@@ -148,7 +148,7 @@ class AULE(object):
       self.http_thread = Thread(target=http_server.serve_forever)
       self.http_thread.start()
 
-    def init_cam(self, timed=True):
+    def init_cam(self, timed=True, duration=120):
       print('Initializing camera...')
       with picamera.PiCamera() as camera:
         camera.resolution = (WIDTH, HEIGHT)
@@ -169,13 +169,13 @@ class AULE(object):
           print('Starting broadcast thread')
           broadcast_thread.start()
           if timed == True:
-            t_end = time() + 15 * 1
+            t_end = time() + 60 * 5
             while time() < t_end:
               camera.wait_recording(1)
           else:
             while True:
               camera.wait_recording(1)
-        except KeyboardInterrupt:
+        except KeyboardInterrupt as e:
           pass
         finally:
           print('Stopping recording')
