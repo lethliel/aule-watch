@@ -5,3 +5,8 @@ After=syslog.target network.target
 [Service]
 Type=simple
 ExecStart=/usr/bin/aule
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=aule
+User=pi
+Group=pi
