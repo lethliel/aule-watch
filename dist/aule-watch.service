@@ -1,0 +1,7 @@
+[Unit]
+Description=Watcher and babyphone application
+After=syslog.target network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/aule
